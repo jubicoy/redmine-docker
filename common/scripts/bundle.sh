@@ -63,6 +63,9 @@ function copy_custom_themes () {
   if [ -d "${RUBY_HOME}/volume/custom_themes" ]; then
     cp -rf ${RUBY_HOME}/volume/custom_themes/* ${RUBY_HOME}/app/public/themes/
   fi
+  if [ -d "${RUBY_HOME}/volume/custom_plugins" ]; then
+    cp -rf ${RUBY_HOME}/volume/custom_plugins/* ${RUBY_HOME}/app/plugins/
+  fi
 }
 
 init_conf

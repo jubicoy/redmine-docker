@@ -16,6 +16,8 @@ SHELL := /bin/bash
 
 ifeq ($(TARGET),3.2-mysql)
 	VERSION := 3.2-mysql
+else ifeq ($(TARGET),3.4-mysql)
+	VERSION := 3.4-mysql
 endif
 ifdef NOCACHE
 	OPTS := --no-cache
@@ -29,13 +31,18 @@ baseimage:
 		&& docker build -t $(BASE_IMAGE_NAME) . \
 		&& popd
 
-container: baseimage
+container:
 ifndef VERSION
 	$(error TARGET not set or invalid)
 endif
+ifeq ($(VERSION),3.2-mysql)
 	pushd $(VERSION) \
 		&& docker build $(OPTS) -t $(IMAGE_NAME):$(VERSION) . \
 		&& popd
+else
+	docker build $(OPTS) -t $(IMAGE_NAME):$(VERSION) -f $(VERSION)/Dockerfile .
+endif
+
 
 push:
 	docker push $(IMAGE_NAME):$(VERSION)
