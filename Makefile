@@ -31,7 +31,7 @@ baseimage:
 		&& docker build -t $(BASE_IMAGE_NAME) . \
 		&& popd
 
-container:
+image:
 ifndef VERSION
 	$(error TARGET not set or invalid)
 endif

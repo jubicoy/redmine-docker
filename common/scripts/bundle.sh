@@ -54,7 +54,7 @@ init_conf () {
 init_bundle () {
   pushd "${RUBY_HOME}/app"
     export RAILS_ENV=production
-    bundle install --without development test rmagick
+    bundle install --without development test
     bundle exec rake generate_secret_token
   popd
 }
